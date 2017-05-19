@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var rules = require('./models/rules.js');
 var url = require('./models/data.js');
 var config = require('./models/db.js');
+var port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -44,6 +45,6 @@ app.get('/:encoded_id', function(req, res){
 });
 
 // We can now navigate to localhost:3000
-var listener = app.listen(3000, function() {
+var listener = app.listen(port, function() {
     console.log('Your server is now listening on port 3000!');
 });
