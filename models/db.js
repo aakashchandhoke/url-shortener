@@ -7,4 +7,5 @@ exports.mongoConfig = {
     /*url:process.env.MONGOLAB_URI;*/        
 };
 
-exports.webhost = "http://" + os.hostname();
+/*exports.webhost = "http://" + os.hostname();*/
+exports.webhost = "http://url-shortner-aakash/";
