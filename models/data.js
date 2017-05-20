@@ -1,15 +1,23 @@
 var MongoClient = require('mongodb').MongoClient,
     settings = require('./db.js'),
-    rules = require('./rules.js');
-var url = process.env.MONGOLAB_URI;
+    rules = require('./rules.js'),
+    startup = require('./startup.js');
+    var db;
+//var url = process.env.MONGOLAB_URI;
 
-var fullMongoUrl =url; /*settings.mongoConfig.serverUrl + settings.mongoConfig.database;*/
+var fullMongoUrl =process.env.MONGODB_URI;/*settings.mongoConfig.serverUrl + settings.mongoConfig.database;*/
 var exports = module.exports = {};
 
+startup().then(function(data) {
+    console.log("After the setup has been complete, we have the following init data:");
+    console.log(data);
+});
+
 MongoClient.connect(fullMongoUrl)
-    .then(function(db) {
-        var urlCollection = db.collection("urls");
-        var counterCollection = db.collection("counters");
+    .then(function(database) {
+        var urlCollection = database.collection("urls");
+        var counterCollection = database.collection("counters");
+        db=database;
         
         /* user system related functions */
         exports.createUrl = function(longUrl, type, shortHost) {
