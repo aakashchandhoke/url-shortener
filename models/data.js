@@ -1,8 +1,9 @@
 var MongoClient = require('mongodb').MongoClient,
     settings = require('./db.js'),
     rules = require('./rules.js');
+var url = process.env.MONGOLAB_URI;
 
-var fullMongoUrl = /*settings.mongoConfig.url;*/settings.mongoConfig.serverUrl + settings.mongoConfig.database;
+var fullMongoUrl =url; /*settings.mongoConfig.serverUrl + settings.mongoConfig.database;*/
 var exports = module.exports = {};
 
 MongoClient.connect(fullMongoUrl)
